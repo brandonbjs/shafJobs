@@ -1,4 +1,4 @@
-# ShafJobs 🎯
+# ShafJobs
 
 A personalized, production-quality entry-level job aggregator built for Brandon Shaffer —
 a CS graduate targeting junior SWE, DevOps, QA, and cloud roles in Phoenix, AZ (hybrid)
