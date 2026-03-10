@@ -1,0 +1,41 @@
+/*
+ * client/src/index.css — Global Styles
+ *
+ * The three @tailwind directives inject Tailwind's base reset,
+ * reusable component classes, and utility classes into the bundle.
+ *
+ * Any custom global styles (not achievable with Tailwind utilities) go below.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Skeleton shimmer animation */
+@layer utilities {
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      #1e293b 25%,
+      #334155 50%,
+      #1e293b 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+/* Custom scrollbar for the filter sidebar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
