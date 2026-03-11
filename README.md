@@ -4,7 +4,7 @@ A personalized, production-quality entry-level job aggregator built for Brandon 
 a CS graduate targeting junior SWE, DevOps, QA, and cloud roles in Phoenix, AZ (hybrid)
 or fully remote (US-based).
 
-Aggregates listings from 8 sources, scores every job against Brandon's skill profile,
+Aggregates listings from 8 sources, scores every job against my skill profile,
 deduplicates across all sources, and presents them in a clean filterable dashboard.
 
 ---
