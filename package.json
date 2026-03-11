@@ -7,7 +7,8 @@
     "dev": "concurrently --names \"server,client\" --prefix-colors \"cyan,magenta\" \"npm run server\" \"npm run client\"",
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
-    "start": "concurrently \"npm run server:start\" \"npm run client:preview\"",
+    "build": "cd client && npm install && npm run build",
+    "start": "node server/index.js",
     "server:start": "cd server && node index.js",
     "client:preview": "cd client && npm run preview",
     "install:all": "npm install && cd server && npm install && cd ../client && npm install"

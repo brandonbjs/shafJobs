@@ -41,12 +41,16 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/shafjobs';
 // helmet sets security-related HTTP headers (XSS protection, no-sniff, etc.)
 app.use(helmet());
 
-// CORS: allow the Vite dev server (port 5173) and any production domain
+// CORS: allow the Vite dev server in development, or a configured production origin
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:4173', // Vite preview
+];
+if (process.env.CLIENT_ORIGIN) {
+  allowedOrigins.push(process.env.CLIENT_ORIGIN);
+}
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:4173', // Vite preview
-  ],
+  origin: allowedOrigins,
   credentials: true,
 }));
 
@@ -72,7 +76,18 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// ── 404 handler ───────────────────────────────────────────────────────────────
+// ── Static frontend (production) ──────────────────────────────────────────────
+// In production, Express serves the React build from client/dist.
+// Any non-API route returns index.html so React Router handles client-side navigation.
+if (process.env.NODE_ENV === 'production') {
+  const clientDist = path.join(__dirname, '../client/dist');
+  app.use(express.static(clientDist));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(clientDist, 'index.html'));
+  });
+}
+
+// ── 404 handler (dev only) ────────────────────────────────────────────────────
 app.use((req, res) => {
   res.status(404).json({ error: `Route not found: ${req.method} ${req.url}` });
 });
